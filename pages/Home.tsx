@@ -147,6 +147,26 @@ export default function Home() {
     [inventory]
   );
 
+  const LootVisual = ({ loot, sizeClass = "h-16 w-16" }: { loot: Loot; sizeClass?: string }) => {
+    const [imageFailed, setImageFailed] = useState(false);
+    const showImage = Boolean(loot.imageUrl) && !imageFailed;
+    return (
+      <div className={`${sizeClass} rounded-md overflow-hidden border border-primary/20 bg-background/50 flex items-center justify-center`}>
+        {showImage ? (
+          <img
+            src={loot.imageUrl}
+            alt={loot.name}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <span className="text-2xl">{loot.icon}</span>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden relative cyber-bg">
       <div className="scan-line fixed top-0 left-0 right-0 h-1 pointer-events-none z-50" />
@@ -280,7 +300,7 @@ export default function Home() {
                 {currentLoot && (
                   <div className="bg-card/50 border border-primary/30 p-6 rounded-sm space-y-3">
                     <p className="text-sm text-muted-foreground">获得战利品</p>
-                    <div className="text-3xl">{currentLoot.icon}</div>
+                    <LootVisual loot={currentLoot} sizeClass="h-20 w-20" />
                     <p className="text-xl font-bold neon-glow">{currentLoot.name}</p>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">稀有度</span>
@@ -320,7 +340,9 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-4">
                     {inventory.map((item, idx) => (
                       <div key={`${item.id}-${idx}`} className="bg-card/50 border border-primary/20 p-4 rounded-sm">
-                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <div className="mb-2">
+                          <LootVisual loot={item} sizeClass="h-14 w-14" />
+                        </div>
                         <p className="font-bold text-sm neon-glow">{item.name}</p>
                         <p className={`text-xs mt-1 ${RARITY_CLASS[item.rarity]}`}>{RARITY_LABEL[item.rarity]}</p>
                         <p className="text-[11px] text-muted-foreground mt-1">{item.district}</p>

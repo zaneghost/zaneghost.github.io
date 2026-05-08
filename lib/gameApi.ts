@@ -6,6 +6,7 @@ export type Loot = {
   value: number;
   icon: string;
   district: string;
+  imageUrl?: string;
 };
 
 export type FightAction = "attack" | "defend" | "flee";
@@ -71,6 +72,7 @@ function createMockLoot(): Loot {
     value: valueBase + randomInt(-50, 200),
     icon: pick(icons),
     district: pick(districts),
+    imageUrl: `https://placehold.co/256x256/1f2937/a78bfa?text=${encodeURIComponent("LOOT")}`,
   };
 }
 
