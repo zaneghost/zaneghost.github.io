@@ -4,6 +4,7 @@ import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  base: "/NeonSoda/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
