@@ -5,7 +5,8 @@
 
 ## 产品文档
 
-- 详细策划文档：[docs/design.md](docs/design.md)
+- 详细策划文档：`docs/design.md`
+- 逻辑图文档：`docs/logic-diagrams.md`
 
 ## 技术栈
 
@@ -33,6 +34,17 @@ npm install
 ```bash
 npm run dev
 ```
+
+### 配置云端藏品服务（可选但推荐）
+
+在项目根目录创建 `.env.local`：
+
+```bash
+VITE_GAME_API_BASE_URL=https://your-api-domain.com
+```
+
+- 配置后：客户端会从云端请求搜索/争抢/撤离结果，不再依赖本地完整藏品池
+- 未配置时：使用内置兜底 mock（仅用于本地演示）
 
 ## 局域网访问（手机调试）
 
@@ -73,6 +85,8 @@ npm run preview -- --host 0.0.0.0 --port 4173
 
 注意：`dist/` 通常不提交到主分支（已在 `.gitignore` 中忽略）。
 
+如果你启用了云端 API（推荐），GitHub Pages 仍然可以托管前端页面，只需要把后端独立部署在可访问域名，并处理好 CORS。
+
 ## 常见问题
 
 ### 1) Node 版本过低导致 Vite 启动失败
@@ -100,13 +114,13 @@ npm install
 .
 ├── src/main.tsx
 ├── App.tsx
-├── Home.tsx
-├── pages/
+├── pages/Home.tsx
+├── pages/NotFound.tsx
 ├── components/
 ├── contexts/
+├── docs/design.md
 ├── index.html
 ├── index.css
-├── start-lan.sh
 └── package.json
 ```
 

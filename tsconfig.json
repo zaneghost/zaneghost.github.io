@@ -11,11 +11,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "*.ts", "*.tsx"]
+  "include": ["src", "pages", "components", "contexts", "lib", "*.ts", "*.tsx"]
 }
